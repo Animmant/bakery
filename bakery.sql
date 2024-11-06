@@ -181,7 +181,7 @@ WHERE ID_Employee = 6;
 
 -- Операції над схемою бази даних
 -- Створення бази даних
-CREATE DATABASE Bakery;
+-- CREATE DATABASE Bakery;
 
 -- Створення таблиці (приклад)
 CREATE TABLE TestTable (
@@ -190,7 +190,7 @@ CREATE TABLE TestTable (
 );
 
 -- Видалення таблиці
-DROP TABLE TestTable;
+-- DROP TABLE TestTable;
 
 -- Видалення бази даних
-DROP DATABASE Bakery;
+-- DROP DATABASE Bakery;
