@@ -122,3 +122,75 @@ SELECT Position, AVG(Salary) as AvgSalary
 FROM Employees
 GROUP BY Position
 HAVING AVG(Salary) > 15000;
+
+-- Підзапити
+-- Знайти працівників із зарплатою вище середньої
+SELECT Name, Salary
+FROM Employees
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
+-- Використання IN
+-- Знайти всіх працівників, які працюють пекарями або кондитерами
+SELECT Name, Position
+FROM Employees
+WHERE Position IN ('Пекар', 'Кондитер');
+
+-- Використання EXISTS
+-- Знайти клієнтів, які робили замовлення
+SELECT Name
+FROM Customers c
+WHERE EXISTS (
+   SELECT 1 
+   FROM Orders o 
+   WHERE o.ID_Customer = c.ID_Customer
+);
+
+-- Використання ANY
+-- Знайти працівників, чия зарплата більша за будь-яку зарплату продавців
+SELECT Name, Salary
+FROM Employees
+WHERE Salary > ANY (
+   SELECT Salary 
+   FROM Employees 
+   WHERE Position = 'Продавець'
+);
+
+-- Використання ALL
+-- Знайти працівників, чия зарплата більша за всі зарплати продавців
+SELECT Name, Salary
+FROM Employees
+WHERE Salary > ALL (
+   SELECT Salary 
+   FROM Employees 
+   WHERE Position = 'Продавець'
+);
+
+-- Маніпулювання даними
+-- INSERT
+INSERT INTO Employees (ID_Employee, Name, Position, Salary)
+VALUES (6, 'Василь Коваленко', 'Пекар', 16000.00);
+
+-- UPDATE
+UPDATE Employees
+SET Salary = Salary * 1.1
+WHERE Position = 'Пекар';
+
+-- DELETE
+DELETE FROM Employees
+WHERE ID_Employee = 6;
+
+-- Операції над схемою бази даних
+-- Створення бази даних
+CREATE DATABASE Bakery;
+
+-- Створення таблиці (приклад)
+CREATE TABLE TestTable (
+   ID bigint PRIMARY KEY,
+   Name varchar(100)
+);
+
+-- Видалення таблиці
+DROP TABLE TestTable;
+
+-- Видалення бази даних
+DROP DATABASE Bakery;
